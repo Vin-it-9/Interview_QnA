@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <link href="../style.css" rel="stylesheet" type="text/css" >
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</head>
+<body>
+<h1 id="quarkus-framework-interview-questions-and-answers">Quarkus Framework Interview Questions and Answers</h1>
+<h3 id="1-what-is-quarkus-and-how-does-it-differ-from-spring-boot">1. What is Quarkus and how does it differ from Spring Boot?</h3>
+<p><strong>Answer:</strong> Quarkus is a Kubernetes-native Java framework optimized for JVMs and native compilation. Unlike Spring Boot, Quarkus offers lower memory usage, faster startup time, and build-time processing using GraalVM native compilation, making it more container-friendly for microservices.</p>
+<h3 id="2-what-is-graalvm-native-image-and-how-does-quarkus-utilize-it">2. What is GraalVM native image and how does Quarkus utilize it?</h3>
+<p><strong>Answer:</strong> GraalVM native image is a technology that ahead-of-time compiles Java code to standalone executables. Quarkus utilizes it to create native binaries with faster startup and lower memory footprint by moving processing from runtime to build time, enabling efficient containerized deployments.</p>
+<h3 id="3-what-are-quarkus-extensions">3. What are Quarkus extensions?</h3>
+<p><strong>Answer:</strong> Quarkus extensions are modules that integrate third-party frameworks with Quarkus&#39;s build and runtime infrastructure. They provide configuration, build items, deployment processors, runtime components, and appropriate GraalVM configurations to efficiently incorporate functionality into Quarkus applications.</p>
+<h3 id="4-how-do-you-configure-a-quarkus-application">4. How do you configure a Quarkus application?</h3>
+<p><strong>Answer:</strong> Configure Quarkus using application.properties or application.yml files in src/main/resources, environment variables, command-line arguments, or programmatically via Config interface. Profiles (e.g., %dev, %test, %prod) allow environment-specific configurations.</p>
+<h3 id="5-what-is-cdi-in-quarkus">5. What is CDI in Quarkus?</h3>
+<p><strong>Answer:</strong> CDI (Contexts and Dependency Injection) is the dependency injection framework used in Quarkus. It provides annotations like @Inject for injection, @ApplicationScoped for singletons, @RequestScoped for request-based lifecycles, and qualifiers for implementation selection.</p>
+<h3 id="6-how-does-hot-reloading-work-in-quarkus">6. How does hot reloading work in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus Dev Mode provides near-instant hot reloading by using Quarkus Dev Mode Compiler and class-loader tricks to replace classes and resources while the application runs. Changes to code or resources automatically trigger recompilation and application update.</p>
+<h3 id="7-what-restful-web-service-capabilities-does-quarkus-provide">7. What RESTful web service capabilities does Quarkus provide?</h3>
+<p><strong>Answer:</strong> Quarkus supports RESTful services through RESTEasy (JAX-RS implementation) and can use either imperative (standard JAX-RS) or reactive (RESTEasy Reactive) programming models. It provides annotations like @Path, @GET, @POST, and automatic JSON serialization/deserialization with Jackson or JSON-B.</p>
+<h3 id="8-what-is-panache-in-quarkus">8. What is Panache in Quarkus?</h3>
+<p><strong>Answer:</strong> Panache is Quarkus&#39;s simplification layer over Hibernate ORM that reduces boilerplate code. It provides active record pattern (PanacheEntity) or repository pattern (PanacheRepository) implementations with built-in methods like findAll(), findById(), and simplified query expressions.</p>
+<h3 id="9-how-do-you-implement-database-access-in-quarkus">9. How do you implement database access in Quarkus?</h3>
+<p><strong>Answer:</strong> Database access in Quarkus is implemented using extensions like quarkus-hibernate-orm for ORM, quarkus-jdbc-* for specific databases, and optionally Panache for simplification. Configure datasources in application.properties and use @Entity, @Inject EntityManager or Panache for database operations.</p>
+<h3 id="10-what-is-reactive-programming-in-quarkus">10. What is reactive programming in Quarkus?</h3>
+<p><strong>Answer:</strong> Reactive programming in Quarkus is implemented through Mutiny, providing Uni (0-1 result) and Multi (multiple results) reactive types. It&#39;s used for non-blocking, asynchronous operations with efficient resource utilization and backpressure support across reactive database drivers, HTTP clients, and messaging.</p>
+<h3 id="11-how-does-quarkus-support-testing">11. How does Quarkus support testing?</h3>
+<p><strong>Answer:</strong> Quarkus supports testing with @QuarkusTest for integration tests, RestAssured for HTTP endpoint testing, and Mockito for mocking. It provides test profiles, in-memory databases, and test containers for integration tests. Tests run in both JVM and native modes to verify native compilation compatibility.</p>
+<h3 id="12-what-is-openapi-and-swagger-ui-in-quarkus">12. What is OpenAPI and Swagger UI in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus provides OpenAPI specification generation from JAX-RS endpoints using quarkus-smallrye-openapi extension. It automatically exposes Swagger UI at /q/swagger-ui for interactive API documentation, supporting both manual annotations and automatic generation from code and Javadoc.</p>
+<h3 id="13-how-do-you-implement-authentication-in-quarkus">13. How do you implement authentication in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement authentication in Quarkus using quarkus-security extensions with various providers (JDBC, LDAP, OAuth2, OIDC, etc.). Use annotations like @RolesAllowed, HTTP Basic/Form auth configurations, or JWT validation. Quarkus Security handles authentication and authorization across REST endpoints and other components.</p>
+<h3 id="14-what-is-quarkus-dev-services">14. What is Quarkus Dev Services?</h3>
+<p><strong>Answer:</strong> Quarkus Dev Services automatically provision development-time services (databases, message brokers, etc.) using containers. They detect when extensions need backing services, automatically start containers in dev/test modes, and configure the application to use them, simplifying development environment setup.</p>
+<h3 id="15-how-do-you-deploy-quarkus-applications-to-kubernetes">15. How do you deploy Quarkus applications to Kubernetes?</h3>
+<p><strong>Answer:</strong> Deploy Quarkus to Kubernetes using quarkus-kubernetes extension, which generates Kubernetes manifests (Deployment, Service, Route) based on application configuration. Use quarkus.kubernetes.* properties to configure resources, add the quarkus-container-image-* extension for container builds, then apply generated manifests with kubectl.</p>
+<h3 id="16-what-is-commandmode-in-quarkus">16. What is CommandMode in Quarkus?</h3>
+<p><strong>Answer:</strong> CommandMode allows Quarkus applications to run as CLI applications that execute and exit rather than as long-running services. Implement QuarkusApplication interface, use @QuarkusMain annotation, and access command line arguments. Suitable for batch jobs, migrations, or admin utilities.</p>
+<h3 id="17-how-does-quarkus-handle-configuration-profiles">17. How does Quarkus handle configuration profiles?</h3>
+<p><strong>Answer:</strong> Quarkus handles profiles with property prefixes like %dev.quarkus.http.port=8080 or %prod.quarkus.http.port=9000 in configuration files. Set active profiles via QUARKUS_PROFILE environment variable or -Dquarkus.profile command line option, with dev, test, and prod as built-in profiles.</p>
+<h3 id="18-what-is-quarkus-funqy">18. What is Quarkus Funqy?</h3>
+<p><strong>Answer:</strong> Quarkus Funqy is a portable function API for serverless environments that works across AWS Lambda, Azure Functions, Google Cloud Functions, and Knative. It provides a simple @Funq annotation with minimal boilerplate, hiding platform-specific details while enabling deployment to multiple cloud providers.</p>
+<h3 id="19-how-does-quarkus-improve-memory-usage-compared-to-traditional-java-frameworks">19. How does Quarkus improve memory usage compared to traditional Java frameworks?</h3>
+<p><strong>Answer:</strong> Quarkus reduces memory usage through build-time metadata processing instead of runtime reflection, minimizing runtime reflection usage, eliminating proxies when possible, reducing class loading, and using GraalVM native compilation to remove unused classes and code paths from the final executable.</p>
+<h3 id="20-what-is-continuous-testing-in-quarkus">20. What is continuous testing in Quarkus?</h3>
+<p><strong>Answer:</strong> Continuous testing in Quarkus automatically runs tests when code changes in dev mode. Enable with --continuous-testing flag in dev mode, which shows test results in the console and UI at /q/dev-ui/continuous-testing, highlighting failures and providing fast feedback during development.</p>
+<h3 id="21-how-does-quarkus-support-messaging-with-apache-kafka">21. How does Quarkus support messaging with Apache Kafka?</h3>
+<p><strong>Answer:</strong> Quarkus supports Kafka via the SmallRye Reactive Messaging extension, using @Incoming and @Outgoing annotations to consume and produce messages. Configure Kafka connection in application.properties, and use Channel for imperative or Multi/Uni for reactive messaging patterns.</p>
+<h3 id="22-what-is-health-checking-in-quarkus">22. What is health checking in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus health checking uses MicroProfile Health to expose /q/health endpoints with liveness and readiness probes for Kubernetes. Create custom health checks by implementing HealthCheck interface and using @Liveness or @Readiness annotations to register them automatically.</p>
+<h3 id="23-how-do-you-implement-metrics-in-quarkus">23. How do you implement metrics in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement metrics using quarkus-micrometer extension with providers like Prometheus. Use @Counted, @Timed, or @Gauge annotations on methods, or inject MeterRegistry to programmatically create metrics. Metrics are exposed at /q/metrics endpoint in the configured format.</p>
+<h3 id="24-what-is-fault-tolerance-in-quarkus">24. What is fault tolerance in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus implements fault tolerance through SmallRye Fault Tolerance (MicroProfile spec) with annotations like @Retry, @Timeout, @CircuitBreaker, @Bulkhead, and @Fallback. These provide resilience patterns for handling failures in distributed systems with configurable parameters for each strategy.</p>
+<h3 id="25-how-do-you-work-with-jpa-in-quarkus">25. How do you work with JPA in Quarkus?</h3>
+<p><strong>Answer:</strong> Use quarkus-hibernate-orm extension, define entities with @Entity annotation, configure datasource in application.properties, and inject EntityManager or use Panache. Quarkus optimizes Hibernate for fast startup and supports both JDBC and reactive database drivers.</p>
+<h3 id="26-what-are-the-security-options-in-quarkus">26. What are the security options in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus security options include Basic/Form auth, JWT, OAuth2/OIDC, and custom SecurityIdentityAugmentors. Use annotations like @RolesAllowed or @Authenticated, configure identity providers in application.properties, and implement SecurityIdentityProvider for custom auth schemes.</p>
+<h3 id="27-how-do-you-implement-background-tasks-in-quarkus">27. How do you implement background tasks in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement background tasks using @Scheduled annotation for cron-like scheduling, CompletableFuture/CompletionStage for async operations, or reactive Uni/Multi types. For worker threads, use @Blocking annotation or ManagedExecutor service to avoid blocking the event loop.</p>
+<h3 id="28-what-is-quarkus-dev-ui">28. What is Quarkus Dev UI?</h3>
+<p><strong>Answer:</strong> Dev UI is a development-time web interface at /q/dev providing tools for development and debugging. It shows extensions, configuration properties, health checks, and provides interactive tools for testing endpoints, monitoring performance, and managing the application in development mode.</p>
+<h3 id="29-how-does-quarkus-support-graphql">29. How does Quarkus support GraphQL?</h3>
+<p><strong>Answer:</strong> Quarkus supports GraphQL via the SmallRye GraphQL extension, implementing the MicroProfile GraphQL specification. Use @GraphQLApi annotation on resource classes, @Query and @Mutation annotations on methods, and define types with @Type annotation. Access GraphQL UI at /q/graphql-ui during development.</p>
+<h3 id="30-what-is-the-quarkus-extension-ecosystem">30. What is the Quarkus extension ecosystem?</h3>
+<p><strong>Answer:</strong> The Quarkus extension ecosystem consists of over 400 extensions that integrate libraries and frameworks with Quarkus&#39;s build system and runtime. Extensions provide optimized integrations with reduced reflection, build-time processing, and native image compatibility for various technologies.</p>
+<h3 id="31-how-do-you-implement-websockets-in-quarkus">31. How do you implement WebSockets in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement WebSockets using the quarkus-websockets extension with @ServerEndpoint annotation, defining methods with @OnOpen, @OnMessage, @OnClose, and @OnError annotations. Use Session objects for bidirectional communication, and client endpoints with @ClientEndpoint annotation for connecting to other WebSocket servers.</p>
+<h3 id="32-what-is-the-difference-between-jvm-and-native-mode-in-quarkus">32. What is the difference between JVM and Native mode in Quarkus?</h3>
+<p><strong>Answer:</strong> JVM mode runs Quarkus applications on a standard JVM with fast startup and low memory compared to traditional frameworks. Native mode compiles the application to a native executable using GraalVM, providing even faster startup (milliseconds), lower memory footprint, but with longer build times and some compatibility limitations.</p>
+<h3 id="33-how-do-you-implement-validation-in-quarkus">33. How do you implement validation in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement validation using quarkus-hibernate-validator extension with Bean Validation annotations (@NotNull, @Size, etc.) on model classes. For REST endpoints, parameters are automatically validated, and you can inject Validator for programmatic validation with custom constraints using @ConstraintValidator.</p>
+<h3 id="34-what-are-build-time-properties-in-quarkus">34. What are build time properties in Quarkus?</h3>
+<p><strong>Answer:</strong> Build time properties configure the application at build time through quarkus.properties files or using -Dquarkus.* system properties during build. They affect code generation, static resources, extension behavior, and native image compilation, and cannot be changed at runtime.</p>
+<h3 id="35-how-does-quarkus-support-cors">35. How does Quarkus support CORS?</h3>
+<p><strong>Answer:</strong> Configure CORS in Quarkus using quarkus.http.cors properties in application.properties to define allowed origins, methods, headers, and credentials. Enable with quarkus.http.cors=true and set properties like quarkus.http.cors.origins to configure specific allowed domains.</p>
+<h3 id="36-what-is-quarkus-cli-and-how-is-it-used">36. What is Quarkus CLI and how is it used?</h3>
+<p><strong>Answer:</strong> Quarkus CLI is a command-line tool for creating, developing, and building Quarkus applications without needing Maven or Gradle directly. Use it to create projects, add extensions, run in dev mode, build native executables, and deploy applications with simple commands like quarkus create or quarkus dev.</p>
+<h3 id="37-how-do-you-configure-database-transactions-in-quarkus">37. How do you configure database transactions in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure transactions using @Transactional annotation on methods with attributes like Transactional.TxType.REQUIRED or REQUIRES_NEW. Set timeout with @Transactional(timeout=) and rollback rules with @Transactional(rollbackOn=). For programmatic transactions, inject TransactionManager and use its methods.</p>
+<h3 id="38-what-is-qute-templating-engine-in-quarkus">38. What is Qute templating engine in Quarkus?</h3>
+<p><strong>Answer:</strong> Qute is Quarkus&#39;s native templating engine focused on type safety and builder patterns. Store templates in src/main/resources/templates, inject Template instances with @Inject @Location(&quot;name.html&quot;), and use it with template.data(&quot;key&quot;, value).render() for server-side rendering with good performance characteristics.</p>
+<h3 id="39-how-do-you-implement-grpc-in-quarkus">39. How do you implement gRPC in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement gRPC with quarkus-grpc extension by defining services in .proto files, generating code with Maven/Gradle plugins, and implementing service interfaces. Create gRPC services with @GrpcService annotation and clients with @GrpcClient injection, supporting both blocking and reactive programming models.</p>
+<h3 id="40-what-is-the-recommended-way-to-handle-configuration-in-quarkus">40. What is the recommended way to handle configuration in Quarkus?</h3>
+<p><strong>Answer:</strong> Handle configuration using application.properties/yaml files, inject values with @ConfigProperty annotation, group related properties with @ConfigMapping interfaces, and validate with @Valid annotation. Use profiles like %dev and %prod for environment-specific values and secrets via config providers like Vault.</p>
+<h3 id="41-how-does-quarkus-achieve-its-fast-startup-time">41. How does Quarkus achieve its fast startup time?</h3>
+<p><strong>Answer:</strong> Quarkus achieves fast startup by moving processing from runtime to build time, using ahead-of-time compilation, minimizing reflection, employing static initialization, reducing classpath scanning, and optimizing the application for GraalVM native compilation.</p>
+<h3 id="42-what-is-container-first-philosophy-in-quarkus">42. What is container-first philosophy in Quarkus?</h3>
+<p><strong>Answer:</strong> Container-first philosophy means Quarkus is designed specifically for containerized environments with minimal resource usage, fast startup times, small memory footprint, and optimized container image sizes, making it ideal for Kubernetes, serverless, and microservices architectures.</p>
+<h3 id="43-how-do-you-create-a-native-executable-in-quarkus">43. How do you create a native executable in Quarkus?</h3>
+<p><strong>Answer:</strong> Create a native executable with <code>./mvnw package -Pnative</code> or <code>./gradlew build -Dquarkus.package.type=native</code>. Requires GraalVM installed or use containerized builds with <code>-Dquarkus.native.container-build=true</code> which uses a container with GraalVM pre-installed.</p>
+<h3 id="44-what-is-live-coding-in-quarkus">44. What is live coding in Quarkus?</h3>
+<p><strong>Answer:</strong> Live coding (Dev Mode) automatically recompiles and restarts the application when code changes, launched with <code>quarkus dev</code> command. It provides near-instant feedback, hot reload capability, continuous testing, and development UI for improved developer experience.</p>
+<h3 id="45-how-does-quarkus-integrate-with-kubernetes">45. How does Quarkus integrate with Kubernetes?</h3>
+<p><strong>Answer:</strong> Quarkus integrates with Kubernetes through extensions that generate Kubernetes manifests, create container images, and deploy directly to clusters. Configure with quarkus.kubernetes.* properties to set resource limits, environment variables, labels, and other Kubernetes-specific settings.</p>
+<h3 id="46-what-is-knative-in-relation-to-quarkus">46. What is Knative in relation to Quarkus?</h3>
+<p><strong>Answer:</strong> Knative is a Kubernetes-based platform for serverless workloads. Quarkus supports Knative through the quarkus-kubernetes extension, generating appropriate Knative service definitions with scaled-to-zero capability, handling event-driven architectures through the Funqy extension for seamless serverless deployments.</p>
+<h3 id="47-how-does-quarkus-support-serverless-deployments">47. How does Quarkus support serverless deployments?</h3>
+<p><strong>Answer:</strong> Quarkus supports serverless via fast startup/low memory for efficient scaling, AWS Lambda/Azure Functions extensions for cloud-specific runtimes, the Funqy API for provider-agnostic functions, and container-based serverless platforms like Knative with optimized cold start performance.</p>
+<h3 id="48-what-is-the-extension-registry-in-quarkus">48. What is the extension registry in Quarkus?</h3>
+<p><strong>Answer:</strong> The extension registry is a catalog of available Quarkus extensions that can be browsed at code.quarkus.io or via the Quarkus CLI. It allows searching, filtering, and adding extensions to projects, with metadata about compatibility, status, and documentation for each extension.</p>
+<h3 id="49-how-do-you-configure-logging-in-quarkus">49. How do you configure logging in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure logging in Quarkus with quarkus.log.* properties in application.properties, setting log levels (quarkus.log.level=DEBUG), categories (quarkus.log.category.&quot;org.hibernate&quot;.level=WARN), handlers, and formats. Supports console, file, and Syslog handlers with customizable formats.</p>
+<h3 id="50-what-is-arc-in-quarkus">50. What is ArC in Quarkus?</h3>
+<p><strong>Answer:</strong> ArC is Quarkus&#39;s compile-time CDI container that processes dependency injection at build time, reducing reflection and startup time. It supports scopes like @Singleton, @ApplicationScoped, and @RequestScoped, qualifiers, producers, and interceptors while optimizing for GraalVM native image compatibility.</p>
+<h3 id="51-how-do-you-implement-non-blocking-io-in-quarkus">51. How do you implement non-blocking I/O in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement non-blocking I/O using reactive programming models with Mutiny&#39;s Uni and Multi types, reactive database drivers (Reactive PostgreSQL, MongoDB), RESTEasy Reactive for HTTP endpoints, and reactive messaging for event streams, avoiding thread blocking with event-loop architecture.</p>
+<h3 id="52-what-is-the-difference-between-imperative-and-reactive-rest-endpoints-in-quarkus">52. What is the difference between imperative and reactive REST endpoints in Quarkus?</h3>
+<p><strong>Answer:</strong> Imperative endpoints (RESTEasy Classic) use blocking operations and thread-per-request model. Reactive endpoints (RESTEasy Reactive) use non-blocking operations with event loop, returning Uni/Multi types for improved throughput and resource utilization under load, especially for I/O-bound applications.</p>
+<h3 id="53-how-do-you-handle-configuration-secrets-in-quarkus">53. How do you handle configuration secrets in Quarkus?</h3>
+<p><strong>Answer:</strong> Handle secrets using encrypted configuration values, Kubernetes secrets (mounted as files or environment variables), HashiCorp Vault integration via quarkus-vault extension, or cloud provider solutions like AWS Secrets Manager through specific extensions that prevent secrets from being hardcoded or leaked.</p>
+<h3 id="54-what-is-zero-config-setup-in-quarkus">54. What is zero config setup in Quarkus?</h3>
+<p><strong>Answer:</strong> Zero config setup uses sensible defaults and auto-configuration to minimize boilerplate. Quarkus configures components based on classpath detection and convention over configuration principles, with extensions providing ready-to-use defaults while still allowing explicit configuration when needed.</p>
+<h3 id="55-how-does-quarkus-support-hot-deployment-compared-to-other-frameworks">55. How does Quarkus support hot deployment compared to other frameworks?</h3>
+<p><strong>Answer:</strong> Quarkus hot deployment is faster than traditional frameworks because it uses an optimized incremental compiler that recompiles only changed classes, efficiently updates class loaders, and preserves application state when possible, providing near-instant feedback during development.</p>
+<h3 id="56-what-is-the-opentelemetry-support-in-quarkus">56. What is the OpenTelemetry support in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus supports OpenTelemetry through the quarkus-opentelemetry extension, which automatically instruments HTTP requests, database calls, and messaging operations for distributed tracing. Configure with quarkus.opentelemetry.* properties to set exporters, sampling rates, and propagation formats.</p>
+<h3 id="57-how-do-you-implement-custom-runtime-initialization-in-quarkus">57. How do you implement custom runtime initialization in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement custom initialization using @Startup annotated beans, ApplicationLifecycleEventObserver implementation listening for StartupEvent, or implementing io.quarkus.runtime.StartupTask interface. For native image specific initialization, use @NativeImageSourcesDirectoryBuildItem in build extensions.</p>
+<h3 id="58-what-is-the-purpose-of-build-time-initialization-in-quarkus">58. What is the purpose of build time initialization in Quarkus?</h3>
+<p><strong>Answer:</strong> Build time initialization processes metadata, generates proxies, and prepares resources during compilation rather than at startup. This shifts processing from runtime to build time, resulting in faster startup, smaller memory footprint, and better compatibility with GraalVM native image constraints.</p>
+<h3 id="59-how-does-quarkus-support-different-environments-and-profiles">59. How does Quarkus support different environments and profiles?</h3>
+<p><strong>Answer:</strong> Quarkus supports environments through profiles (%dev, %test, %prod) in configuration files, allowing different settings for each environment. Set the active profile with QUARKUS_PROFILE environment variable or -Dquarkus.profile system property, with profile-specific configurations taking precedence.</p>
+<h3 id="60-what-is-the-reflection-registration-process-in-quarkus-for-native-images">60. What is the reflection registration process in Quarkus for native images?</h3>
+<p><strong>Answer:</strong> Quarkus extensions automatically register classes that need reflection in native images. For custom classes, use @RegisterForReflection annotation or create a native image configuration file manually. This ensures GraalVM includes necessary reflection data while minimizing runtime reflection impact.</p>
+<h3 id="61-how-do-you-create-custom-quarkus-extensions">61. How do you create custom Quarkus extensions?</h3>
+<p><strong>Answer:</strong> Create custom extensions by generating a skeleton with the quarkus-maven-plugin, implementing deployment-time processors that produce build items, and runtime components. Extensions require deployment and runtime modules, with the deployment module handling build-time processing and the runtime module containing components used at application runtime.</p>
+<h3 id="62-what-is-hibernate-reactive-in-quarkus">62. What is Hibernate Reactive in Quarkus?</h3>
+<p><strong>Answer:</strong> Hibernate Reactive is a non-blocking, reactive API for database access that uses Vert.x reactive drivers instead of JDBC. Configure with quarkus-hibernate-reactive extension, use Mutiny&#39;s Uni/Multi instead of Session/EntityManager, and operate on reactive results with non-blocking database operations.</p>
+<h3 id="63-how-do-you-implement-caching-in-quarkus">63. How do you implement caching in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement caching with quarkus-cache extension using annotations like @CacheResult, @CacheInvalidate, and @CacheInvalidateAll. Configure cache names, expiration, and size in application.properties with quarkus.cache.* settings, supporting Caffeine cache for in-memory caching and Redis for distributed caching.</p>
+<h3 id="64-what-is-the-difference-between-singleton-and-applicationscoped-in-quarkus">64. What is the difference between @Singleton and @ApplicationScoped in Quarkus?</h3>
+<p><strong>Answer:</strong> Both create singleton instances, but @Singleton creates eager, non-proxied beans initialized at startup, while @ApplicationScoped creates lazy-initialized, proxied beans created on first use. @ApplicationScoped supports contextual lifecycle events and better interception, making it generally preferred in Quarkus applications.</p>
+<h3 id="65-how-do-you-handle-database-migrations-in-quarkus">65. How do you handle database migrations in Quarkus?</h3>
+<p><strong>Answer:</strong> Handle database migrations with Flyway or Liquibase extensions. For Flyway, add quarkus-flyway dependency and place SQL scripts in src/main/resources/db/migration. For Liquibase, use quarkus-liquibase with changelog files in src/main/resources/db/changelog. Configure with quarkus.flyway.* or quarkus.liquibase.* properties.</p>
+<h3 id="66-how-does-quarkus-support-mongodb">66. How does Quarkus support MongoDB?</h3>
+<p><strong>Answer:</strong> Support MongoDB through quarkus-mongodb-client for basic driver access, quarkus-mongodb-panache for simplified data access patterns, and reactive variants for non-blocking operations. Configure connection with quarkus.mongodb.connection-string property and use MongoClient, MongoDB Panache repositories, or reactive alternatives.</p>
+<h3 id="67-what-is-the-recommended-way-to-test-rest-endpoints-in-quarkus">67. What is the recommended way to test REST endpoints in Quarkus?</h3>
+<p><strong>Answer:</strong> Test REST endpoints with @QuarkusTest annotation and RestAssured for HTTP assertions. Example:</p>
+<pre><code class="language-java">@QuarkusTest
+public class ResourceTest {
+    @Test
+    public void testEndpoint() {
+        given()
+            .when().get(&quot;/hello&quot;)
+            .then()
+                .statusCode(200)
+                .body(is(&quot;Hello&quot;));
+    }
+}
+</code></pre>
+<h3 id="68-how-do-you-handle-database-transactions-across-multiple-services">68. How do you handle database transactions across multiple services?</h3>
+<p><strong>Answer:</strong> Handle distributed transactions with @Transactional annotation spanning service calls within the same JVM, manual transaction demarcation with TransactionManager, or saga pattern for cross-service transactions using events for coordination and compensating actions for rollbacks.</p>
+<h3 id="69-what-is-the-command-mode-feature-in-quarkus">69. What is the Command Mode feature in Quarkus?</h3>
+<p><strong>Answer:</strong> Command Mode runs applications as short-lived processes rather than servers. Implement QuarkusApplication interface, annotate with @QuarkusMain, and handle command line arguments. Useful for batch jobs, migration scripts, or one-time tasks with full dependency injection support.</p>
+<h3 id="70-how-do-you-configure-cross-origin-resource-sharing-cors-in-quarkus">70. How do you configure cross-origin resource sharing (CORS) in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure CORS with quarkus.http.cors=true in application.properties, then set quarkus.http.cors.origins, quarkus.http.cors.methods, and quarkus.http.cors.headers to define allowed origins, HTTP methods, and headers. For more complex cases, implement CORS filter with ContainerRequestFilter.</p>
+<h3 id="71-what-is-the-role-of-the-applicationproperties-file-in-quarkus">71. What is the role of the application.properties file in Quarkus?</h3>
+<p><strong>Answer:</strong> The application.properties file configures Quarkus applications with settings for extensions, runtime behavior, and deployment options. It supports environment-specific profiles with %dev, %test, %prod prefixes, property substitution with ${}, and structured configuration like nested properties for complex settings.</p>
+<h3 id="72-how-does-quarkus-support-reactive-database-access">72. How does Quarkus support reactive database access?</h3>
+<p><strong>Answer:</strong> Quarkus supports reactive database access through reactive drivers and APIs like Reactive PostgreSQL Client, MongoDB Reactive Streams, Hibernate Reactive, and Reactive Panache. These provide non-blocking database operations returning Uni/Multi types for improved resource utilization and scalability.</p>
+<h3 id="73-what-is-the-difference-between-jpa-and-hibernate-reactive">73. What is the difference between JPA and Hibernate Reactive?</h3>
+<p><strong>Answer:</strong> JPA with Hibernate ORM uses blocking JDBC connections and synchronous operations, while Hibernate Reactive uses non-blocking drivers and asynchronous operations returning Uni/Multi types. JPA blocks threads during database operations, while Hibernate Reactive allows releasing threads back to the event loop during I/O.</p>
+<h3 id="74-how-do-you-implement-request-filters-in-quarkus">74. How do you implement request filters in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement request filters by creating classes implementing ContainerRequestFilter or ContainerResponseFilter with @Provider annotation. Apply to specific paths with @NameBinding annotations or globally to all endpoints without constraints. Filters can modify requests/responses or abort processing with responses.</p>
+<h3 id="75-what-is-the-purpose-of-the-quarkusindex-dependency-property">75. What is the purpose of the quarkus.index-dependency property?</h3>
+<p><strong>Answer:</strong> The quarkus.index-dependency property instructs Quarkus to include specific dependencies in Jandex indexing, enabling CDI discovery and other reflection-free operations on classes from those dependencies. This is needed when using CDI beans from dependencies not automatically indexed by Quarkus.</p>
+<h3 id="76-how-do-you-handle-multipart-form-data-in-quarkus-rest-endpoints">76. How do you handle multipart form data in Quarkus REST endpoints?</h3>
+<p><strong>Answer:</strong> Handle multipart data using @MultipartForm annotation with a class containing fields annotated with @FormParam, or use MultipartFormDataInput for more dynamic processing:</p>
+<pre><code class="language-java">@POST
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public Response upload(@MultipartForm FileUpload form) {
+    // process form.file and form.name
+}
+</code></pre>
+<h3 id="77-what-are-build-time-properties-in-quarkus">77. What are build time properties in Quarkus?</h3>
+<p><strong>Answer:</strong> Build time properties configure the Quarkus build process and are evaluated during compilation, not at runtime. They affect code generation, native image building, extensions behavior, and are prefixed with quarkus.* in application.properties or passed as -D parameters to Maven/Gradle build commands.</p>
+<h3 id="78-how-do-you-implement-custom-health-checks-in-quarkus">78. How do you implement custom health checks in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement custom health checks by creating classes implementing HealthCheck interface and annotating with @Liveness or @Readiness:</p>
+<pre><code class="language-java">@Liveness
+@ApplicationScoped
+public class DatabaseHealthCheck implements HealthCheck {
+    @Override
+    public HealthCheckResponse call() {
+        return HealthCheckResponse.up(&quot;Database connection&quot;);
+    }
+}
+</code></pre>
+<h3 id="79-what-is-the-vertx-event-loop-model-in-quarkus">79. What is the Vert.x event loop model in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus uses Vert.x event loops for handling non-blocking operations, processing requests through a small number of threads that never block. Long-running or blocking operations should be annotated with @Blocking to move execution to worker threads, preventing event loop stalls.</p>
+<h3 id="80-how-do-you-configure-logging-categories-and-levels-in-quarkus">80. How do you configure logging categories and levels in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure logging with quarkus.log.category properties in application.properties:</p>
+<pre><code>quarkus.log.level=INFO
+quarkus.log.category.&quot;io.quarkus&quot;.level=DEBUG
+quarkus.log.category.&quot;org.hibernate&quot;.level=WARN
+</code></pre>
+<p>Each category can have its own level, and the configuration supports runtime updates through the logging endpoint.</p>
+<h3 id="81-how-do-you-implement-oauth2oidc-authentication-in-quarkus">81. How do you implement OAuth2/OIDC authentication in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement OAuth2/OIDC using quarkus-oidc extension, configure identity provider in application.properties with quarkus.oidc.auth-server-url and client credentials. Use @Authenticated or @RolesAllowed annotations to protect endpoints and inject SecurityIdentity to access token claims.</p>
+<h3 id="82-what-is-the-rest-client-in-quarkus">82. What is the REST Client in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus REST Client implements MicroProfile REST Client for type-safe HTTP API invocation. Create interfaces with JAX-RS annotations, register with @RegisterRestClient, and inject with @RestClient. Supports both synchronous and reactive (Uni/Multi) return types for HTTP calls.</p>
+<h3 id="83-how-do-you-implement-custom-security-providers-in-quarkus">83. How do you implement custom security providers in Quarkus?</h3>
+<p><strong>Answer:</strong> Create custom security by implementing HttpAuthenticationMechanism for authentication, IdentityProvider for identity stores, or SecurityIdentityAugmentor for enhancing existing identities. Register them as CDI beans to integrate with Quarkus security system.</p>
+<h3 id="84-what-is-mutiny-and-how-is-it-used-in-quarkus">84. What is Mutiny and how is it used in Quarkus?</h3>
+<p><strong>Answer:</strong> Mutiny is Quarkus&#39;s reactive programming library with Uni (0-1 result) and Multi (stream) types. It provides an event-driven API for chaining transformations, failure handling, and controlling backpressure in reactive applications, used across Quarkus reactive extensions.</p>
+<h3 id="85-how-do-you-implement-api-rate-limiting-in-quarkus">85. How do you implement API rate limiting in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement rate limiting with custom filters using ContainerRequestFilter, RateLimiter from Resilience4j extension, or extensions like quarkus-rate-limiter. Store counters in memory or Redis for distributed environments and return 429 Too Many Requests when limits are exceeded.</p>
+<h3 id="86-what-is-the-funqy-http-binding-in-quarkus">86. What is the Funqy HTTP binding in Quarkus?</h3>
+<p><strong>Answer:</strong> Funqy HTTP binding allows exposing simple Java methods as HTTP endpoints with minimal annotations. Add quarkus-funqy-http extension and annotate methods with @Funq to expose them as HTTP endpoints, useful for lightweight microservices and functions-as-a-service deployments.</p>
+<h3 id="87-how-do-you-configure-ssltls-in-quarkus-applications">87. How do you configure SSL/TLS in Quarkus applications?</h3>
+<p><strong>Answer:</strong> Configure SSL/TLS using quarkus.http.ssl properties in application.properties, specifying certificate file paths or keystore locations. For development, use quarkus.http.insecure-requests policy to redirect or reject insecure requests to the secure port.</p>
+<h3 id="88-what-is-quarkus-config-and-how-does-it-work">88. What is Quarkus Config and how does it work?</h3>
+<p><strong>Answer:</strong> Quarkus Config is built on SmallRye Config implementing MicroProfile Config, providing a unified API for configuration from multiple sources (properties files, environment variables, secrets). Use @ConfigProperty for injection or inject Config interface for programmatic access.</p>
+<h3 id="89-how-do-you-implement-a-scheduled-job-in-quarkus">89. How do you implement a scheduled job in Quarkus?</h3>
+<p><strong>Answer:</strong> Use @Scheduled annotation from quarkus-scheduler extension on methods to execute them periodically:</p>
+<pre><code class="language-java">@ApplicationScoped
+public class TaskBean {
+    @Scheduled(every=&quot;10m&quot;)
+    void periodic() {
+        // executed every 10 minutes
+    }
+}
+</code></pre>
+<p>Supports cron expressions and named schedules defined in application.properties.</p>
+<h3 id="90-how-does-quarkus-support-graalvm-reflection">90. How does Quarkus support GraalVM reflection?</h3>
+<p><strong>Answer:</strong> Quarkus auto-registers classes needing reflection in GraalVM through build-time processing by extensions. For custom classes, use @RegisterForReflection annotation or create reflection-config.json files. Extensions provide specialized build items for reflection registration during native image creation.</p>
+<h3 id="91-what-is-reactive-messaging-in-quarkus">91. What is reactive messaging in Quarkus?</h3>
+<p><strong>Answer:</strong> Reactive messaging implements the MicroProfile Reactive Messaging specification for event streaming using @Incoming and @Outgoing annotations to connect methods to channels. Configure connectors (Kafka, AMQP, MQTT) in application.properties for underlying transport.</p>
+<h3 id="92-how-do-you-implement-jms-messaging-in-quarkus">92. How do you implement JMS messaging in Quarkus?</h3>
+<p><strong>Answer:</strong> Use quarkus-artemis-jms extension for JMS, inject JMSContext, and use standard JMS API. For ActiveMQ Artemis, configure connection with quarkus.artemis properties. JMS operations can be used in traditional blocking mode or with reactive adapters.</p>
+<h3 id="93-what-is-the-difference-between-jax-rs-and-resteasy-reactive">93. What is the difference between JAX-RS and RESTEasy Reactive?</h3>
+<p><strong>Answer:</strong> JAX-RS (RESTEasy Classic) uses a blocking, thread-per-request model while RESTEasy Reactive is optimized for reactive, non-blocking execution on IO threads. RESTEasy Reactive performs build-time analysis for optimized request handling with better resource utilization under load.</p>
+<h3 id="94-how-does-quarkus-integrate-with-kubernetes-configmaps">94. How does Quarkus integrate with Kubernetes ConfigMaps?</h3>
+<p><strong>Answer:</strong> Quarkus reads Kubernetes ConfigMaps mounted as volumes or environment variables through its standard configuration sources. The quarkus-kubernetes-config extension adds direct ConfigMap/Secret integration, allowing them to be accessed through standard Config API without manual mounting.</p>
+<h3 id="95-what-is-the-lra-long-running-action-extension-in-quarkus">95. What is the LRA (Long Running Action) extension in Quarkus?</h3>
+<p><strong>Answer:</strong> LRA extension implements the MicroProfile LRA specification for saga-based transactions in microservices. Use @LRA annotations to define compensating actions that ensure eventual consistency across services without distributed transactions, particularly useful in microservice architectures.</p>
+<h3 id="96-how-do-you-implement-custom-metrics-in-quarkus">96. How do you implement custom metrics in Quarkus?</h3>
+<p><strong>Answer:</strong> Use quarkus-micrometer extension and inject MeterRegistry to register custom counters, gauges, timers, and distributions:</p>
+<pre><code class="language-java">@ApplicationScoped
+public class MetricService {
+    @Inject
+    MeterRegistry registry;
+
+    public void recordValue(double value) {
+        registry.counter(&quot;custom.metric&quot;).increment(value);
+    }
+}
+</code></pre>
+<h3 id="97-what-is-quarkus-approach-to-reflection-in-native-images">97. What is Quarkus&#39; approach to reflection in native images?</h3>
+<p><strong>Answer:</strong> Quarkus minimizes reflection by using build-time processing, static initialization, and code generation. When reflection is necessary, extensions automatically register required classes for reflection in GraalVM native images, while custom classes can be registered with @RegisterForReflection annotation.</p>
+<h3 id="98-how-do-you-implement-custom-serialization-in-quarkus">98. How do you implement custom serialization in Quarkus?</h3>
+<p><strong>Answer:</strong> Use Jackson&#39;s @JsonSerialize/@JsonDeserialize annotations with custom serializers, implement JsonbAdapter for JSON-B, or create MessageBodyReader/MessageBodyWriter for JAX-RS endpoints. For native images, register classes for reflection and serializers with appropriate extensions.</p>
+<h3 id="99-what-is-the-purpose-of-the-quarkusnative-properties">99. What is the purpose of the quarkus.native.* properties?</h3>
+<p><strong>Answer:</strong> The quarkus.native.* properties configure GraalVM native image compilation settings, including resource inclusion, reflection configuration, native library linking, container builds, and debug options. They allow fine-tuning of native executables for size, startup performance, and compatibility.</p>
+<h3 id="100-how-do-you-integrate-quarkus-with-container-orchestration-platforms">100. How do you integrate Quarkus with container orchestration platforms?</h3>
+<p><strong>Answer:</strong> Integrate with container platforms using quarkus-container-image extensions for building images (Docker, Jib, S2I), quarkus-kubernetes/openshift for generating deployment manifests, and quarkus-kubernetes-config for configuration. Use environment-specific properties to tune memory, CPU limits, health probes, and scaling parameters.</p>
+<h3 id="101-how-does-quarkus-support-reactive-programming-with-websockets">101. How does Quarkus support reactive programming with WebSockets?</h3>
+<p><strong>Answer:</strong> Use quarkus-websockets extension with @ServerEndpoint annotation, defining @OnOpen, @OnMessage, @OnClose methods. For reactive WebSockets, use quarkus-websockets-reactive to work with Publisher types for streaming data bidirectionally with backpressure handling.</p>
+<h3 id="102-what-is-graalvm-ahead-of-time-compilation-in-quarkus">102. What is GraalVM Ahead-of-Time compilation in Quarkus?</h3>
+<p><strong>Answer:</strong> GraalVM AOT compilation converts Java bytecode to native machine code during build time rather than runtime, eliminating JIT overhead. Quarkus optimizes code for AOT by moving initialization to build time and minimizing reflection, resulting in smaller binaries and faster startup.</p>
+<h3 id="103-how-do-you-implement-database-connection-pooling-in-quarkus">103. How do you implement database connection pooling in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus automatically configures connection pooling with Agroal. Configure pool size, acquisition timeout, and validation settings with properties like quarkus.datasource.jdbc.max-size and quarkus.datasource.jdbc.acquisition-timeout in application.properties.</p>
+<h3 id="104-what-is-the-quarkusintegrationtest-annotation">104. What is the @QuarkusIntegrationTest annotation?</h3>
+<p><strong>Answer:</strong> @QuarkusIntegrationTest runs tests against the final application package (JAR/native executable) rather than in-memory, verifying production packaging works correctly. It&#39;s particularly useful for native image testing to ensure GraalVM compatibility of all features.</p>
+<h3 id="105-how-does-quarkus-support-grpc-communications">105. How does Quarkus support gRPC communications?</h3>
+<p><strong>Answer:</strong> Use quarkus-grpc extension with protobuf definitions to generate client/server code. Implement services with @GrpcService annotation and create clients with @GrpcClient injection, supporting both blocking and reactive programming models with seamless Mutiny integration.</p>
+<h3 id="106-what-is-the-purpose-of-quarkusmain-annotation">106. What is the purpose of @QuarkusMain annotation?</h3>
+<p><strong>Answer:</strong> @QuarkusMain identifies the main class for command-mode applications, specifying the entry point for execution. The annotated class typically implements QuarkusApplication interface with a run() method that executes application logic and returns an exit code.</p>
+<h3 id="107-how-do-you-implement-custom-dependency-injection-qualifiers">107. How do you implement custom Dependency Injection qualifiers?</h3>
+<p><strong>Answer:</strong> Create custom qualifiers as annotations with @Qualifier and @Retention(RUNTIME):</p>
+<pre><code class="language-java">@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Premium {}
+</code></pre>
+<p>Then use it on implementations (@Premium @ApplicationScoped) and injection points (@Inject @Premium).</p>
+<h3 id="108-what-is-the-microprofile-context-propagation-in-quarkus">108. What is the MicroProfile Context Propagation in Quarkus?</h3>
+<p><strong>Answer:</strong> MicroProfile Context Propagation allows context data (security, transactions) to flow across asynchronous boundaries. Configure with quarkus-smallrye-context-propagation extension and use ManagedExecutor to propagate contexts in CompletionStage or reactive streams operations.</p>
+<h3 id="109-how-do-you-handle-multiple-datasources-in-quarkus">109. How do you handle multiple datasources in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure multiple datasources with named configuration:</p>
+<pre><code class="language-properties">quarkus.datasource.db1.db-kind=postgresql
+quarkus.datasource.db2.db-kind=mysql
+</code></pre>
+<p>Then qualify injections with @Named(&quot;db1&quot;) or use the configurable default datasource properties.</p>
+<h3 id="110-whats-the-difference-between-dev-mode-and-production-mode-in-quarkus">110. What&#39;s the difference between dev mode and production mode in Quarkus?</h3>
+<p><strong>Answer:</strong> Dev mode provides hot reload, extensive debugging, and development UIs with more verbose output, optimized for developer experience. Production mode disables development features, optimizes for performance, applies different configuration profiles, and can use native compilation for deployment.</p>
+<h3 id="111-how-do-you-implement-file-uploads-in-quarkus">111. How do you implement file uploads in Quarkus?</h3>
+<p><strong>Answer:</strong> Handle file uploads with multipart form data using @MultipartForm with a class containing fields annotated with @FormParam(&quot;file&quot;) and mapped to Java File, byte[], or InputStream types. For reactive handling, use Uni<MultipartFormDataInput>.</p>
+<h3 id="112-what-is-the-purpose-of-the-applicationyaml-file-in-quarkus">112. What is the purpose of the application.yaml file in Quarkus?</h3>
+<p><strong>Answer:</strong> application.yaml provides hierarchical configuration as an alternative to flat application.properties, using YAML format for better readability of nested structures. Quarkus processes it the same way as properties files, with identical property names and profile support.</p>
+<h3 id="113-how-do-you-incorporate-custom-banner-in-quarkus-applications">113. How do you incorporate custom banner in Quarkus applications?</h3>
+<p><strong>Answer:</strong> Create a banner.txt file in src/main/resources with ASCII art or text to be displayed during startup. Customize with quarkus.banner.enabled and quarkus.banner.path properties or disable completely with quarkus.banner.enabled=false.</p>
+<h3 id="114-how-does-quarkus-support-feature-flags-and-toggle-configuration">114. How does Quarkus support feature flags and toggle configuration?</h3>
+<p><strong>Answer:</strong> Implement feature flags using Smallrye Config profiles, property expressions with default values, or the unleash-quarkus extension for dynamic feature toggles. Control features with environment-specific configuration and programmatic access through Config API.</p>
+<h3 id="115-what-is-the-purpose-of-the-registerforreflection-annotation">115. What is the purpose of the @RegisterForReflection annotation?</h3>
+<p><strong>Answer:</strong> @RegisterForReflection tells GraalVM native image builder to include reflection metadata for annotated classes, enabling reflection operations in native executables. Essential for custom serialization, dynamic proxies, and reflection-based libraries that aren&#39;t automatically detected.</p>
+<h3 id="116-how-do-you-implement-custom-json-serialization-in-quarkus">116. How do you implement custom JSON serialization in Quarkus?</h3>
+<p><strong>Answer:</strong> Use either Jackson annotations (@JsonSerialize) with custom serializers or JSON-B adapters (JsonbAdapter implementations). Register them either through CDI beans or in application.properties with quarkus.jackson.* or quarkus.jsonb.* settings.</p>
+<h3 id="117-what-is-the-purpose-of-the-quarkustest-properties">117. What is the purpose of the quarkus.test.* properties?</h3>
+<p><strong>Answer:</strong> quarkus.test.* properties configure test execution, including continuous testing behavior, native test settings, test profiles, and resource limits. Use them to control how tests run in different environments and to configure test-specific resource allocation.</p>
+<h3 id="118-how-do-you-handle-multi-tenancy-in-quarkus-applications">118. How do you handle multi-tenancy in Quarkus applications?</h3>
+<p><strong>Answer:</strong> Implement multi-tenancy using tenant resolvers (from headers, path, claims), tenant-specific datasources with RouteDataSource, schema-based separation, or discriminator columns. The quarkus-hibernate-orm-multi-tenancy extension provides built-in support for various tenancy models.</p>
+<h3 id="119-what-is-the-storkclient-in-quarkus">119. What is the StorkClient in Quarkus?</h3>
+<p><strong>Answer:</strong> StorkClient provides service discovery and client-side load balancing through the quarkus-stork extension. It integrates with REST clients and gRPC clients to locate services dynamically using various discovery mechanisms (Consul, Kubernetes) with configurable load balancing strategies.</p>
+<h3 id="120-how-do-you-deploy-quarkus-applications-to-serverless-environments">120. How do you deploy Quarkus applications to serverless environments?</h3>
+<p><strong>Answer:</strong> Use platform-specific extensions (quarkus-amazon-lambda, quarkus-azure-functions) that adapt Quarkus to function-as-service platforms. Configure with minimal memory settings, prefer native mode for fast cold starts, and use Funqy for provider-agnostic function definitions that can be deployed to multiple cloud providers.</p>
+<h3 id="121-what-is-build-time-versus-runtime-configuration-in-quarkus">121. What is build-time versus runtime configuration in Quarkus?</h3>
+<p><strong>Answer:</strong> Build-time configuration occurs during compilation with properties starting with quarkus.* affecting code generation and optimization. Runtime configuration occurs when the application starts, supporting dynamic changes. Build-time properties cannot change after compilation, especially for native images.</p>
+<h3 id="122-how-do-you-build-layered-container-images-with-quarkus">122. How do you build layered container images with Quarkus?</h3>
+<p><strong>Answer:</strong> Enable layered builds with quarkus.container-image.build=true and quarkus.jib.layers.enabled=true. This creates separate layers for dependencies, application code, and resources, improving Docker cache utilization and reducing deployment time for incremental updates.</p>
+<h3 id="123-what-is-session-handling-in-quarkus-web-applications">123. What is session handling in Quarkus web applications?</h3>
+<p><strong>Answer:</strong> Quarkus supports HTTP sessions with quarkus-undertow extension using @SessionScoped beans and HttpSession injection. For clustered sessions, use quarkus-infinispan-client extension for distributed session storage across multiple application instances.</p>
+<h3 id="124-how-do-you-implement-custom-health-check-probes">124. How do you implement custom health check probes?</h3>
+<p><strong>Answer:</strong> Create classes implementing HealthCheck interface, return HealthCheckResponse objects, and annotate with @Liveness or @Readiness:</p>
+<pre><code class="language-java">@Liveness
+public class StorageHealthCheck implements HealthCheck {
+    @Override
+    public HealthCheckResponse call() {
+        return HealthCheckResponse.builder()
+            .name(&quot;Storage&quot;)
+            .status(isOperational())
+            .build();
+    }
+}
+</code></pre>
+<h3 id="125-what-is-the-difference-between-native-and-jvm-mode-for-testing">125. What is the difference between native and JVM mode for testing?</h3>
+<p><strong>Answer:</strong> JVM mode tests run on the JVM with faster execution and support for debugging, while native mode tests execute against the native binary to verify GraalVM compatibility. Native tests run with @NativeImageTest annotation and verify the application works identically in native mode.</p>
+<h3 id="126-how-do-you-handle-database-migration-failures-in-quarkus">126. How do you handle database migration failures in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure Flyway or Liquibase with quarkus.flyway.migrate-at-start=true and quarkus.flyway.validate-on-migrate=true to validate migrations before applying them. Implement custom MigrationFailureHandler for Flyway or set quarkus.liquibase.validate-on-update=true with proper error handling in application startup.</p>
+<h3 id="127-what-is-quarkus-dev-services-and-how-do-you-customize-it">127. What is Quarkus Dev Services and how do you customize it?</h3>
+<p><strong>Answer:</strong> Dev Services automatically starts containerized development dependencies (databases, message brokers) during development. Customize with properties like quarkus.datasource.devservices.port, quarkus.datasource.devservices.image-name, or disable specific services with quarkus.datasource.devservices.enabled=false.</p>
+<h3 id="128-how-do-you-implement-database-sharding-in-quarkus">128. How do you implement database sharding in Quarkus?</h3>
+<p><strong>Answer:</strong> Implement sharding using multiple named datasources, a custom routing datasource extending AbstractDataSourceRouter, and a ThreadLocal context to determine the current shard. For JPA, use multiple persistence units or programmatically select EntityManagerFactory based on shard keys.</p>
+<h3 id="129-what-is-the-withtransaction-annotation">129. What is the @WithTransaction annotation?</h3>
+<p><strong>Answer:</strong> @WithTransaction provides declarative transaction management for Hibernate Reactive or Reactive SQL clients, creating and committing transactions automatically around method execution:</p>
+<pre><code class="language-java">@WithTransaction
+Uni&lt;List&lt;Person&gt;&gt; findAllPeople() {
+    return sessionFactory.withSession(s -&gt;
+        s.createQuery(&quot;FROM Person&quot;, Person.class).getResultList()
+    );
+}
+</code></pre>
+<h3 id="130-how-do-you-optimize-quarkus-native-image-size">130. How do you optimize Quarkus native image size?</h3>
+<p><strong>Answer:</strong> Reduce native image size with quarkus.native.enable-reports=true to identify large contributors, quarkus.native.additional-build-args to set GraalVM options like --gc=serial, using UPX compression, removing unused extensions, and minimizing included resources with resource filtering.</p>
+<h3 id="131-what-is-the-event-bus-in-quarkus">131. What is the Event Bus in Quarkus?</h3>
+<p><strong>Answer:</strong> The Event Bus provides CDI-based event publication and consumption for in-memory messaging. Publish events with Event<T> and @Inject Event<OrderCreated> events, and consume with @Observer methods or reactive variants using @ObservesAsync for asynchronous processing.</p>
+<h3 id="132-how-do-you-secure-quarkus-applications-with-jwt">132. How do you secure Quarkus applications with JWT?</h3>
+<p><strong>Answer:</strong> Use quarkus-smallrye-jwt extension, configure public key with smallrye.jwt.verify.key properties, enable JWT with quarkus.http.auth.policy.role-policy1.roles-allowed=user, and use @RolesAllowed to protect endpoints. Access claims with @Inject JsonWebToken token.</p>
+<h3 id="133-what-are-the-testing-patterns-in-quarkus">133. What are the testing patterns in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus supports unit testing with standard JUnit, slice testing with specialized annotations (@QuarkusTest with mocked services), integration testing with test containers (@QuarkusIntegrationTest), and continuous testing in dev mode. Mock dependencies with @InjectMock and verify behavior with standard test assertions.</p>
+<h3 id="134-how-do-you-implement-database-replication-in-quarkus">134. How do you implement database replication in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure read/write splitting with primary/replica datasources using multiple named datasources, create custom qualifiers (@ReadOnly, @Primary), and use @Transactional(readOnly=true) to route queries to replica databases while writes go to the primary database.</p>
+<h3 id="135-what-is-the-purpose-of-configmapping-in-quarkus">135. What is the purpose of @ConfigMapping in Quarkus?</h3>
+<p><strong>Answer:</strong> @ConfigMapping creates type-safe configuration interfaces that map structured configuration properties to Java interfaces with nested properties, validation, and default methods:</p>
+<pre><code class="language-java">@ConfigMapping(prefix = &quot;server&quot;)
+interface ServerConfig {
+    String host();
+    int port();
+    Optional&lt;String&gt; certificate();
+}
+</code></pre>
+<h3 id="136-how-does-quarkus-support-graphql-subscriptions">136. How does Quarkus support GraphQL subscriptions?</h3>
+<p><strong>Answer:</strong> GraphQL subscriptions use quarkus-smallrye-graphql extension with @Subscription-annotated methods returning Multi<T> types. They provide real-time updates through WebSocket connections, with built-in backpressure handling for streaming data to GraphQL clients.</p>
+<h3 id="137-what-is-the-purpose-of-extension-spi-in-quarkus">137. What is the purpose of Extension SPI in Quarkus?</h3>
+<p><strong>Answer:</strong> Extension SPI (Service Provider Interface) allows creating custom Quarkus extensions that integrate with the build process, provide runtime capabilities, and configure components. It includes BuildItems for build-time metadata exchange, Processors for code generation, and RecorderBytecodeTransformer for bytecode manipulation.</p>
+<h3 id="138-how-do-you-implement-content-negotiation-in-quarkus-rest">138. How do you implement Content Negotiation in Quarkus REST?</h3>
+<p><strong>Answer:</strong> Content negotiation uses standard JAX-RS annotations like @Produces and @Consumes with media types. Support multiple formats by specifying multiple values (@Produces({&quot;application/json&quot;, &quot;application/xml&quot;})) and use MessageBodyReader/Writer implementations for custom formats.</p>
+<h3 id="139-what-are-the-different-build-tools-supported-by-quarkus">139. What are the different build tools supported by Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus supports Maven with quarkus-maven-plugin, Gradle with quarkus-gradle-plugin, and the Quarkus CLI for build-tool-agnostic workflows. Each provides commands for project creation, dependency management, development mode, testing, and native image building.</p>
+<h3 id="140-how-do-you-implement-client-side-load-balancing-in-quarkus">140. How do you implement client-side load balancing in Quarkus?</h3>
+<p><strong>Answer:</strong> Use Stork extension with RestClient or gRPC client by adding @RegisterClientHeaders and configuring discovery and load balancing in application.properties:</p>
+<pre><code class="language-properties">quarkus.stork.my-service.service-discovery.type=consul
+quarkus.stork.my-service.load-balancer.type=round-robin
+</code></pre>
+<h3 id="141-what-is-the-purpose-of-recordableconstructor">141. What is the purpose of @RecordableConstructor?</h3>
+<p><strong>Answer:</strong> @RecordableConstructor marks constructors used by Quarkus bytecode recording system during build time, enabling GraalVM to properly handle object instantiation in native images for classes used in extension recorder contexts without requiring default constructors.</p>
+<h3 id="142-how-do-you-implement-circuit-breaking-in-quarkus">142. How do you implement circuit breaking in Quarkus?</h3>
+<p><strong>Answer:</strong> Use SmallRye Fault Tolerance with @CircuitBreaker annotation on methods that call external services:</p>
+<pre><code class="language-java">@CircuitBreaker(requestVolumeThreshold=4, failureRatio=0.5, delay=1000)
+public String callExternalService() {
+    // service call that might fail
+}
+</code></pre>
+<h3 id="143-what-is-the-purpose-of-the-ifbuildprofile-annotation">143. What is the purpose of the @IfBuildProfile annotation?</h3>
+<p><strong>Answer:</strong> @IfBuildProfile conditionally activates beans based on the active build profile, allowing environment-specific implementations:</p>
+<pre><code class="language-java">@IfBuildProfile(&quot;dev&quot;)
+@ApplicationScoped
+public class DevNotificationService implements NotificationService {
+    // Development-specific implementation
+}
+</code></pre>
+<h3 id="144-how-do-you-implement-custom-annotation-processors-in-quarkus">144. How do you implement custom annotation processors in Quarkus?</h3>
+<p><strong>Answer:</strong> Create annotation processors by implementing BiConsumer&lt;AnnotationInstance, AnnotationTarget&gt; and registering them in a BuildStep method returning AnnotationsTransformerBuildItem. This enables build-time transformation of application code based on custom annotations.</p>
+<h3 id="145-what-is-the-difference-between-eager-and-lazy-cdi-beans-in-quarkus">145. What is the difference between eager and lazy CDI beans in Quarkus?</h3>
+<p><strong>Answer:</strong> Eager beans (@Startup or @ApplicationScoped without proxy) initialize during application startup, while lazy beans initialize on first use. Eager initialization ensures services are ready at startup but increases startup time, while lazy initialization improves startup performance but may cause delays on first request.</p>
+<h3 id="146-how-do-you-implement-custom-migration-scripts-with-flyway-in-quarkus">146. How do you implement custom migration scripts with Flyway in Quarkus?</h3>
+<p><strong>Answer:</strong> Place SQL scripts in src/main/resources/db/migration with naming pattern V1__description.sql for versioned migrations or R__description.sql for repeatable migrations. For programmatic migrations, implement JavaMigration interface and register with quarkus.flyway.javamigrations configuration.</p>
+<h3 id="147-what-is-quarkus-testing-resource-pattern">147. What is Quarkus Testing Resource pattern?</h3>
+<p><strong>Answer:</strong> QuarkusTestResource provides managed lifecycle for test dependencies using @QuarkusTestResource annotation on test classes. Implement QuarkusTestResourceLifecycleManager interface to start/stop external resources like databases or services before and after tests, making tests self-contained.</p>
+<h3 id="148-how-do-you-implement-proper-exception-handling-in-quarkus-rest">148. How do you implement proper exception handling in Quarkus REST?</h3>
+<p><strong>Answer:</strong> Implement ExceptionMapper<T> interfaces as CDI beans with @Provider annotation to convert exceptions to HTTP responses. For global exception handling, use @ServerExceptionMapper annotation in RESTEasy Reactive applications with specific status codes and response formats.</p>
+<h3 id="149-what-is-the-bootstrapping-process-in-quarkus">149. What is the bootstrapping process in Quarkus?</h3>
+<p><strong>Answer:</strong> Quarkus bootstrapping involves static initialization of Arc container, processing of build-time metadata, recorders execution to configure runtime components, and minimal runtime configuration. This process is optimized for fast startup with most heavy lifting done during build rather than runtime.</p>
+<h3 id="150-how-do-you-configure-thread-pools-in-quarkus">150. How do you configure thread pools in Quarkus?</h3>
+<p><strong>Answer:</strong> Configure thread pools with quarkus.thread-pool.* properties for worker threads and quarkus.vertx.eventloop.* for event loop threads. For custom executor services, use @Produces methods returning ManagedExecutorService with specific thread pool settings through ExecutorBuilder.</p>
+
+</body>
+</html>
